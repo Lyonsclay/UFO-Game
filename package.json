@@ -1,0 +1,19 @@
+{
+  "name": "redux_router_universal_test",
+  "version": "1.0.0",
+  "description": "A simple app using Redux React-Router and server side rendering.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Redux",
+    "React-Router",
+    "Isomorphic"
+  ],
+  "author": "Clay",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  }
+}
