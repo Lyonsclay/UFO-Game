@@ -6,24 +6,24 @@ class Ship extends React.Component {
     
     return(
       <div style={this.props.shipStyle}>
-        <svg version="1.1" width="170px" height="170px" viewBox="0 0 547 418">
+        <svg version="1.1" width="200px" height="200px" viewBox="0 0 547 418">
           <g id="Layer_1">
             <polygon fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" points="419.5,254.5 424.5,254.5 523.5,159.5 518.5,159.5 	"/>
             <polygon fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" points="129.5,254.5 124.5,254.5 25.5,159.5 30.5,159.5 	"/>
             <ellipse fill="#B3B3B3" stroke="#666666" strokeMiterlimit="10" cx="273.2" cy="28.8" rx="6.2" ry="17.5"/>
             <rect x="265.5" y="53.5" fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" width="17" height="55"/>
             <ellipse fill="#B3B3B3" stroke="#666666" strokeMiterlimit="10" cx="274" cy="110.5" rx="29.3" ry="16.6"/>
-            <path fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" d="M160.2,399c0,7.1,45.8,9,48.2,9s54-2.5,54-9
+            <path className="burner" fill="#FFFFFF" strokeWidth="2px" stroke="#666666" strokeMiterlimit="10" d="M160.2,399c0,7.1,45.8,9,48.2,9s54-2.5,54-9
               c0,0-47.1-31.7-54-31.7S160.2,399,160.2,399z"/>
-            <path fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" d="M353.2,108.6c0-1.1-27.8,5.7-78.7,5.7c-50.8,0-83.9-6.8-83.9-5.7
+            <path fill="#FFFFFF" stroke="#666666" strokeWidth="2px" strokeMiterlimit="10" d="M353.2,108.6c0-1.1-27.8,5.7-78.7,5.7c-50.8,0-83.9-6.8-83.9-5.7
               c0,0,74.1,36.3,85.1,36.3C286.7,144.9,353.2,108.6,353.2,108.6z"/>
-            <path fill="#999999" stroke="#666666" strokeMiterlimit="10" d="M224.5,374.5c0,0-6.7,4-15.5,4c-8.7,0-15.5-4-15.5-4v-19h31V374.5
+        <path fill="#999999" stroke="#666666"  strokeWidth="2px" strokeMiterlimit="10" d="M224.5,374.5c0,0-6.7,4-15.5,4c-8.7,0-15.5-4-15.5-4v-19h31V374.5
               z"/>
-            <path fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" d="M291.2,400c0,7.1,45.8,9,48.2,9s54-2.5,54-9
+        <path fill="#FFFFFF" stroke="#666666"  strokeWidth="2px" strokeMiterlimit="10" d="M291.2,400c0,7.1,45.8,9,48.2,9s54-2.5,54-9
               c0,0-47.1-31.7-54-31.7S291.2,400,291.2,400z"/>
-            <path fill="#808080" stroke="#666666" strokeMiterlimit="10" d="M355.5,375.5c0,0-6.7,4-15.5,4c-8.7,0-15.5-4-15.5-4v-19h31V375.5
+        <path fill="#808080" stroke="#666666" strokeMiterlimit="10"  strokeWidth="2px" d="M355.5,375.5c0,0-6.7,4-15.5,4c-8.7,0-15.5-4-15.5-4v-19h31V375.5
               z"/>
-            <path fill="#FFFFFF" stroke="#666666" strokeMiterlimit="10" d="M367.8,173.1c14.3,6.9,25.5,19.9,34.3,31.1
+        <path fill="#FFFFFF" stroke="#666666"  strokeWidth="2px" strokeMiterlimit="10" d="M367.8,173.1c14.3,6.9,25.5,19.9,34.3,31.1
               c24.8,31.9,50.4,94.7,51.7,109.6c1.2,14.9-13.7,26.5-29,36.5c0,0-6.5,5.9-22.7,9.1c-38,7.5-230.7,4.5-254.2,0
               c-13.4-2.6-22.7-9.1-22.7-9.1c-15.3-10-30.3-21.5-29-36.5c1.2-14.9,26.9-77.7,51.7-109.6c8.7-11.2,19.9-24.3,34.3-31.1
               c14.3-6.9,54-19.2,93.3-19.2C316.7,153.9,353.4,166.3,367.8,173.1z"/>

@@ -2,56 +2,74 @@ import React from 'react';
 import { render } from 'react-dom';
 import UFO from './UFO';
 import Ship from './Ship';
+import { Provider } from 'react-redux';
+import configureStore from './store';
+import {
+  moveLeft,
+  moveRight,
+  moveFreeze,
+  incrementClock
+} from './actions';
+import { connect } from 'react-redux';
 
+const store = configureStore();
 
 class App extends React.Component {
   constructor() {
     super()
    
     this.state = {
-      ufos: [],
-      screen: { width: window.innerWidth, height: window.innerHeight },
-      circleX: 0,
-      circleY: 0,
-      counter: 0
+      screen: { width: window.innerWidth, height: window.innerHeight }
     };
   }
 
   componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress, false);
     requestAnimationFrame(() => {this.update()});
   }
 
-  update = () => {
-    this.setState({
-      counter: this.state.counter + .01,
-      circleX: Math.sin(this.state.counter) * 300,
-      circleY: Math.cos(this.state.counter) * 100
-    });
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress, false);
+  }
 
+
+  update = () => {
+    this.props.dispatch(incrementClock());
+    if (Math.abs(this.props.shipClock) > 80) {
+      this.props.dispatch(moveFreeze());
+    }
     requestAnimationFrame(() => {this.update()});
+  }
+
+  handleKeyPress = (e) => {
+    if (e.key === '[') {
+      this.props.dispatch(moveLeft());
+    } else if (e.key === ']') {
+      this.props.dispatch(moveRight());
+    }
   }
 
   render() {
     const ufoStyle = {
       position: 'absolute',
-      top: (100 + this.state.circleX).toString() + 'px',
-      left: (500 + this.state.circleY).toString() + 'px'
+      top: (100 + this.props.circleX).toString() + 'px',
+      left: (500 + this.props.circleY).toString() + 'px'
     };
     const ufoStyle2 = {
       position: 'absolute',
-      left: (500 + this.state.circleX).toString() + 'px',
-      top: (200 + this.state.circleY).toString() + 'px'
+      left: (500 + this.props.circleX).toString() + 'px',
+      top: (200 + this.props.circleY).toString() + 'px'
     };
     const ufoStyle3 = {
       position: 'absolute',
-      left: (500 + 2 * this.state.circleX).toString() + 'px',
-      top: (400 + 2 * this.state.circleY).toString() + 'px'
+      left: (500 + 2 * this.props.circleX).toString() + 'px',
+      top: (400 + 2 * this.props.circleY).toString() + 'px'
     };
     const shipStyle = {
       position: 'absolute',
-      left: '600px',
+      left: this.props.shipX.toString() + 'px',
       top: '700px'
-    }
+    };
     const galaxyStyle={ width: this.state.screen.width, height: this.state.screen.height };
 
     return (
@@ -65,4 +83,20 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('app'));
+const mapStateToProps = (state) => {
+  return {
+    shipX: state.shipX,
+    circleX: state.circleX,
+    circleY: state.circleY,
+    clock: state.clock,
+    shipClock: state.shipClock
+  };
+};
+
+const Game = connect(mapStateToProps)(App);
+
+render(
+  <Provider store={store}>
+    <Game />
+  </Provider>, document.getElementById('app')
+);
