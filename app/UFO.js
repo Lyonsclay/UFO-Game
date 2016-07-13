@@ -1,73 +1,71 @@
 import React from 'react';
-import { render } from 'react-dom';
 
-class UFO {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+class UFO extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
-  render(state) {
-    // Draw
-    console.log(state);
-    const context = state.context;
-    context.save();
-    context.translate(this.x, this.y);
-    // context.rotate(this.rotation * Math.PI / 180);
-    context.strokeStyle = 'brown';
-    context.fillStyle = 'cyan';
-    context.lineWidth = 2;
-    context.beginPath();
-    context.arc(-20,75,35,0,Math.PI,true)
-    // context.arc(-20, 0, 0, Math.PI, false)
-    context.lineTo(-150, 110);
-    context.arcTo(120,110,10,20,Math.PI,false);
-    context.closePath();
-    context.fill();
-    context.stroke();
-    context.restore();
+  render() {
+    // const width = "549";
+    // const height = "169.5";
+
+    return (
+      <div style={this.props.ufoStyle}>   
+      <svg  width={this.props.width} height={this.props.height} viewBox="0 0 549 169.5">
+        <g>
+        <path fill="#FFFFFF" strokeWidth="4" stroke="#666666"  d="M376,55.7c-11.4,11-75.1,18.1-101.2,18.1
+            c-30,0-91.7-11.1-101.9-19.1c4.8-3,11-6.5,18.2-11.4C211.6,29.2,238.5,9,273.3,9h0.5C308,9,334.3,29.4,355,43
+            C364.3,49,370.9,52.5,376,55.7z"/>
+          <path fill="#CCCCCC" stroke="#666666" d="M540.2,105.6c-0.3-4.8-36.7-21.6-64-28.7
+            c-15.2-4-69.6-18.2-100.6-21.3c-12.3,11-76.2,17.8-101.6,17.8c-26.4,0-89.3-10.2-101.3-18.6c-1.7,0.3-7.4,1.2-8.4,1.3
+            c-23.1,3.6-62.4,14.4-93.8,24.4C29.7,93.5,6.5,104.3,5,106.7c1.3,5.5,2.1,10.6,22.6,15.5c6.1,1.5,31.4,9.1,73,15.9
+            c48.1,7.8,112.6,16.3,172.9,16.3c43.5,0,93.8-4.6,138.6-11.3c46.5-6.9,86-15.3,106.5-20.8c15.2-4.1,20.4-13.5,20.4-13.5
+            C539.2,108,540.3,106.6,540.2,105.6z"/>
+          <g>
+            <path fill="#FFFFFF" stroke="#666666"   d="M275.7,129c-13.9,0-25.2-6.1-25.2-13.5s11.3-13.5,25.2-13.5
+              s25.2,6.1,25.2,13.5S289.6,129,275.7,129z"/>
+            <path fill="#FFFFFF" stroke="#666666"  d="M300.9,115.5c0,7.4-11.3,13.5-25.2,13.5s-25.2-6.1-25.2-13.5
+              s11.3-13.5,25.2-13.5S300.9,108.1,300.9,115.5z"/>
+          </g>
+          <g>
+            <path fill="#FFFFFF" stroke="#666666"  d="M364,121.4c-1.4,0.1-2.8,0.2-4.1,0.2c-11,0-19.7-4.6-20.3-10.8
+              c-0.3-3.4,1.7-6.8,5.7-9.7c4.2-3,9.9-5,16.2-5.6c1.4-0.1,2.8-0.2,4.1-0.2c11,0,19.7,4.6,20.3,10.8
+              C386.5,113.3,376.7,120.1,364,121.4z"/>
+          </g>
+          <g>
+            <path fill="#FFFFFF" stroke="#666666"  d="M461.8,100.7c-3.8,3.5-9.2,6.1-15.4,7.5
+              c-2.8,0.6-5.7,0.9-8.4,0.9c-9.1,0-16-3.5-17.1-8.6c-0.7-3.3,0.9-6.9,4.5-10.2c3.8-3.5,9.2-6.1,15.4-7.5c2.8-0.6,5.7-0.9,8.4-0.9
+              c9.1,0,16,3.5,17.1,8.6C467.1,93.8,465.5,97.4,461.8,100.7z"/>
+            <path fill="#FFFFFF" stroke="#666666"  d="M461.8,100.7c-3.8,3.5-9.2,6.1-15.4,7.5
+              c-2.8,0.6-5.7,0.9-8.4,0.9c-9.1,0-16-3.5-17.1-8.6c-0.7-3.3,0.9-6.9,4.5-10.2c3.8-3.5,9.2-6.1,15.4-7.5c2.8-0.6,5.7-0.9,8.4-0.9
+              c9.1,0,16,3.5,17.1,8.6C467.1,93.8,465.5,97.4,461.8,100.7z"/>
+          </g>
+          <g>
+            <path fill="#FFFFF" stroke="#666666"  d="M211.7,111.6c-0.8,5.9-8.9,10.1-19.3,10.1
+              c-1.8,0-3.6-0.1-5.4-0.4c-6.2-0.9-11.9-3-16-6.2c-3.9-3-5.8-6.5-5.3-9.8c0.8-5.9,8.9-10.1,19.3-10.1c1.8,0,3.6,0.1,5.5,0.4
+              c6.2,0.9,11.9,3,16,6.2C210.2,104.8,212.1,108.3,211.7,111.6z"/>
+            <path fill="#FFFFFF" stroke="#666666"  d="M211.7,111.6c-0.8,5.9-8.9,10.1-19.3,10.1
+              c-1.8,0-3.6-0.1-5.4-0.4c-6.2-0.9-11.9-3-16-6.2c-3.9-3-5.8-6.5-5.3-9.8c0.8-5.9,8.9-10.1,19.3-10.1c1.8,0,3.6,0.1,5.5,0.4
+              c6.2,0.9,11.9,3,16,6.2C210.2,104.8,212.1,108.3,211.7,111.6z"/>
+          </g>
+          <g>
+            <path fill="#FFFFFF" stroke="#666666"  d="M133.5,96.5c-1,5.5-8.5,9.4-18.3,9.4c-2.2,0-4.5-0.2-6.8-0.6
+              c-6.2-1.1-11.8-3.5-15.7-6.8c-3.8-3.1-5.5-6.7-5-10c1-5.5,8.5-9.4,18.3-9.4c2.2,0,4.5,0.2,6.8,0.6c6.2,1.1,11.8,3.5,15.7,6.8
+              C132.4,89.6,134.1,93.2,133.5,96.5z"/>
+            <path fill="#FFFFFF" stroke="#666666"  d="M133.5,96.5c-1,5.5-8.5,9.4-18.3,9.4c-2.2,0-4.5-0.2-6.8-0.6
+              c-6.2-1.1-11.8-3.5-15.7-6.8c-3.8-3.1-5.5-6.7-5-10c1-5.5,8.5-9.4,18.3-9.4c2.2,0,4.5,0.2,6.8,0.6c6.2,1.1,11.8,3.5,15.7,6.8
+              C132.4,89.6,134.1,93.2,133.5,96.5z"/>
+          </g>
+          <g>
+        <path fill="#808080"  d="M541.2,106.1c3.2,10.3-6,18.2-26.7,23.6c-37.8,9.8-124.5,31-245,32.3C137.3,163.5,51.6,134.6,34,129.7
+              c-25.2-7-27.6-14-28.2-23c3.1,6.9,7.7,10.3,12.5,12.1c18.2,6.9,73.4,19.4,139.4,27.5c34.4,4.2,71.7,7.5,107.5,7.5
+              c24.1,0,61.2-0.8,99.2-4.8c49-5.2,110-16.5,131.9-21.8c14.7-3.5,30.2-6.8,38.2-13.8C536.7,111.6,538.3,110.7,541.2,106.1z"/>
+          </g>
+        </g>
+
+      </svg>
+    </div>);
   }
 }
 
-
-
-class Canvas extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { screen: { width: window.innerWidth, height: window.innerHeight } };
-  }
-
-  
-  componentDidMount() {
-    console.log('Hello Canvas Mounted');
-    const context = this.refs.canvas.getContext('2d');
-    this.setState({ context: context });
-    requestAnimationFrame(() => {this.update()});
-  }
-
-  update() {
-    const context = this.state.context;
-
-    // Motion trail
-    context.fillStyle = 'orange';
-    context.globalAlpha = 0.4;
-    context.fillRect(0, 0, this.state.screen.width, this.state.screen.height);
-    context.globalAlpha = 1;
-    const xPos = this.state.screen.width/2;
-    const yPos = this.state.screen.height/2;
-    const ufo = new UFO(xPos, yPos);
-    ufo.render(this.state)
-
-    // Next frame
-    // requestAnimationFrame(() => {this.update()});
-  }
-
-
-
-  render() {
-    return <canvas ref='canvas' width={this.state.screen.width} height={this.state.screen.height} ></canvas>;
-  }
-};
-
-render(<Canvas />, document.getElementById('app'));
+export default UFO;
