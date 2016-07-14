@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import UFO from './UFO';
 import Ship from './Ship';
 import Bullet from './Bullet';
-import { Provider } from 'react-redux';
 import configureStore from './store';
 import {
   moveLeft,
@@ -11,9 +12,11 @@ import {
   moveFreeze,
   incrementClock,
   fireBullet,
-  addUFO
+  addUFO,
+  hitUFO,
+  endGame
 } from './actions';
-import { connect } from 'react-redux';
+import collisionDetection from './collisionDetection';
 
 const store = configureStore();
 
@@ -41,12 +44,29 @@ class App extends React.Component {
 
   update = () => {
     this.props.dispatch(incrementClock());
+
     if (Math.round(this.props.clock * 100) % 193 === 0) {
-      console.log(this.props.ufos);
       this.props.dispatch(addUFO());
     }
-    requestAnimationFrame(() => {this.update()});
-  }
+
+    this.props.ufos.forEach((ufo) => {
+      if (ufo.top > 670 && ufo.top < 750  && Math.abs(ufo.left - this.props.shipX) < 140) {
+        this.props.dispatch(endGame());
+      }
+    });
+
+    this.props.bullets.forEach((bullet, bulletIndex) => {
+      this.props.ufos.forEach((ufo, ufoIndex) => {
+        if (bullet.left > ufo.left && bullet.left < ufo.left + 130 && bullet.top > ufo.top && bullet.top < ufo.top + 55) {
+          this.props.dispatch(hitUFO(bulletIndex, ufoIndex)); 
+        } 
+      });
+    });
+
+    if (this.props.play) {
+      requestAnimationFrame(() => {this.update()});
+    }
+  };
 
   handleKeyDown = (e) => {
     if (e.key === '[') {
@@ -54,34 +74,19 @@ class App extends React.Component {
     } else if (e.key === ']') {
       this.props.dispatch(moveRight());
     }
-  }
+  };
 
   handleKeyUp = (e) => {
     this.props.dispatch(moveFreeze());
-  }
+  };
 
   handleKeyPress = (e) => {
     if (e.key === ' ') {
       this.props.dispatch(fireBullet());
     }
-  }
+  };
 
   render() {
-    const ufoStyle = {
-      position: 'absolute',
-      top: (100 + this.props.circleX * 300).toString() + 'px',
-      left: (500 + this.props.circleY * 100).toString() + 'px'
-    };
-    const ufoStyle2 = {
-      position: 'absolute',
-      left: (500 + this.props.circleX * 300).toString() + 'px',
-      top: (200 + this.props.circleY * 100).toString() + 'px'
-    };
-    const ufoStyle3 = {
-      position: 'absolute',
-      left: (500 + 2 * this.props.circleX * 300).toString() + 'px',
-      top: (400 + 2 * this.props.circleY * 100).toString() + 'px'
-    };
     const shipStyle = {
       position: 'absolute',
       left: this.props.shipX.toString() + 'px',
@@ -107,13 +112,48 @@ class App extends React.Component {
         }}
       />
     );
-    const galaxyStyle={ width: this.state.screen.width, height: this.state.screen.height };
+    const galaxyStyle={
+      position: 'fixed',
+      width: this.state.screen.width,
+      height: this.state.screen.height
+    };
+    const endGameStyle={
+      position: 'absolute',
+      left: 300,
+      top: 200,
+      fontFamily: 'Impact',
+      fontSize: '100px',
+      color: 'DarkGray'
+    };
+    const scoreStyle={
+      position: 'absolute',
+      left: this.state.screen.width - 250,
+      top: 50,
+      fontFamily: 'Impact',
+      fontSize: '40px',
+      color: 'LightGray',
+      paddingLeft: '20px',
+      paddingRight: '20px',
+      border: '5px solid LightGray',
+      borderRadius: '8px'
+    };
+    const gameOver = () => { 
+      let message;
+
+      if (this.props.play) {
+        message = '';
+      } else {
+        message = <h1 style={endGameStyle}>You Have Been Destroyed!</h1>;
+      }
+
+      return message;
+    };
 
     return (
       <div className="Galaxy" style={galaxyStyle}>
-        <UFO width={130} height={55} ufoStyle={ufoStyle} />
-        <UFO width={130} height={55} ufoStyle={ufoStyle2} />
-        <UFO width={130} height={55} ufoStyle={ufoStyle3} />
+        <h2 style={scoreStyle}>score: {this.props.score}</h2>
+        {gameOver()}
+        {ufos}
         {bullets}
         <Ship shipStyle={shipStyle} />
       </div>
@@ -128,7 +168,9 @@ const mapStateToProps = (state) => {
     circleY: state.circleY,
     clock: state.clock,
     bullets: state.bullets,
-    ufos: state.ufos
+    ufos: state.ufos,
+    play: state.play,
+    score: state.score
   };
 };
 

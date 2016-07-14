@@ -11,7 +11,7 @@ class UFO extends React.Component {
 
     return (
       <div style={this.props.ufoStyle}>   
-      <svg  width={this.props.width} height={this.props.height} viewBox="0 0 549 169.5">
+        <svg  width="130px" height="55px" viewBox="0 0 549 169.5">
         <g>
         <path fill="#FFFFFF" strokeWidth="4" stroke="#666666"  d="M376,55.7c-11.4,11-75.1,18.1-101.2,18.1
             c-30,0-91.7-11.1-101.9-19.1c4.8-3,11-6.5,18.2-11.4C211.6,29.2,238.5,9,273.3,9h0.5C308,9,334.3,29.4,355,43
