@@ -1,16 +1,16 @@
 {
-  "name": "redux_router_universal_test",
+  "name": "ufo-game",
   "version": "1.0.0",
-  "description": "A simple app using Redux React-Router and server side rendering.",
+  "description": "A demonstration of a browser game in React & Redux.",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --devtool -eval --progress --colors --hot --content-base build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha './app/*.spec.js' --compilers js:babel-core/register --require setup.js"
   },
   "keywords": [
     "Redux",
-    "React-Router",
-    "Isomorphic"
+    "React",
+    "Fun"
   ],
   "author": "Clay",
   "license": "ISC",

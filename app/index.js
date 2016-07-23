@@ -73,24 +73,30 @@ class App extends React.Component {
       this.props.dispatch(moveLeft());
     } else if (e.key === ']') {
       this.props.dispatch(moveRight());
+    } else if (e.key === ' ') {
+        this.props.dispatch(fireBullet());
     }
-  };
+ };
 
   handleKeyUp = (e) => {
-    this.props.dispatch(moveFreeze());
-  };
-
-  handleKeyPress = (e) => {
     if (e.key === ' ') {
       this.props.dispatch(fireBullet());
+    } else {
+      this.props.dispatch(moveFreeze());
     }
   };
+
+  // handleKeyPress = (e) => {
+  //   if (e.key === ' ') {
+  //     this.props.dispatch(fireBullet());
+  //   }
+  // };
 
   render() {
     const shipStyle = {
       position: 'absolute',
       left: this.props.shipX.toString() + 'px',
-      top: '700px'
+      top: (this.state.screen.height - 200).toString() + 'px'
     };
     const ufos = this.props.ufos.map((ufo, i) =>
       <UFO

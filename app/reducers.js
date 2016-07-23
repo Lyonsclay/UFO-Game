@@ -19,6 +19,7 @@ const initialState = {
   circleY: 0,
   ufos: [{top: -10, left: 600, xSet: 500, ySet: 300}],
   bullets: [],
+  fireWait: true,
   score: 0
 };
 
@@ -81,7 +82,11 @@ const gameState = (state = initialState, action) => {
     });
   case FIRE_BULLET:
     return Object.assign({}, state, {
-      bullets: [...state.bullets, {left: state.shipX +66, top: 680}]
+      bullets: [...state.bullets, {left: state.shipX + 66, top: 680}]
+    });
+  case FIRE_NOW:
+    return Object.assign({}, state, {
+      fireWait: false
     });
   case ADD_UFO:
     return Object.assign({}, state, {
