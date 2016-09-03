@@ -4,10 +4,11 @@ import {
   MOVE_FREEZE,
   INCREMENT_CLOCK,
   FIRE_BULLET,
+  FIRE_NOW,
   ADD_UFO,
   END_GAME,
   HIT_UFO
-} from './actions';
+} from '../actions';
 import { combineReducers } from 'redux';
 
 const initialState = {
@@ -66,15 +67,15 @@ const removeBullet = (bullets, index) => {
   return bullets.filter((bullet, i) => i !== index);
 };
 
-const gameState = (state = initialState, action) => {
+const gameState = (state = {}, action) => {
   switch (action.type) {
   case MOVE_LEFT:
     return Object.assign({}, state, {
-      shipVelX: -4
+      shipVelX: -20
     });
   case MOVE_RIGHT:
     return Object.assign({}, state, {
-      shipVelX: 4
+      shipVelX: 20 
     });
   case MOVE_FREEZE:
     return Object.assign({}, state, {
@@ -94,7 +95,6 @@ const gameState = (state = initialState, action) => {
              initUFO(state.ufos.length, state.circleX, state.circleY)]
     });
   case HIT_UFO:
-    console.log(action.payload)
     return Object.assign({}, state, {
       ufos: removeUFO(state.ufos, action.payload.ufoIndex),
       bullets: removeBullet(state.bullets, action.payload.bulletIndex),
@@ -117,22 +117,5 @@ const gameState = (state = initialState, action) => {
     return state;
   }
 };
-
-// const clockState = (state = initialState, action) => {
-//   switch (action.type) {
-//   case INCREMENT_CLOCK:
-//     return Object.assign({}, state, {
-//       clock: state.clock + .01,
-//       circleX: Math.sin(state.clock) * 300,
-//       circleY: Math.cos(state.clock) * 100
-//     });
-//   default:
-//     return state;
-//   }
-// };
-
-// const rootReducer = combineReducers({
-//   shipState, clockState
-// });
 
 export default gameState;

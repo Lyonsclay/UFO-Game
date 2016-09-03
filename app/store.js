@@ -1,15 +1,13 @@
 import { createStore, compose } from 'redux';
-import rootReducer from './reducers';
-
-const createNewStore = compose()(createStore);
+import rootReducer from './reducers/game';
 
 export default function configureStore(initialState) {
-  const store = createNewStore(rootReducer, initialState);
+  const store = createStore(rootReducer, initialState);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
-      const nextReducer = require('./reducers');
+    module.hot.accept('./reducers/game', () => {
+      const nextReducer = require('./reducers/game');
       store.replaceReducer(nextReducer);
     });
   }

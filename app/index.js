@@ -18,7 +18,21 @@ import {
 } from './actions';
 import collisionDetection from './collisionDetection';
 
-const store = configureStore();
+const initialState = {
+  play: true,
+  clock: 0,
+  shipX: 600,
+  shipVelX: 0,
+  circleX: 0,
+  circleY: 0,
+  ufos: [{top: -10, left: 600, xSet: 500, ySet: 300}],
+  bullets: [],
+  fireWait: true,
+  score: 0
+};
+
+
+const store = configureStore(initialState);
 
 class App extends React.Component {
   constructor() {

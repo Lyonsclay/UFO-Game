@@ -11,13 +11,20 @@ const collisionDetection = (ufos, shipX, dispatch) => {
   });
 }; 
 
-
 export default collisionDetection;
 
+const collided = () => {
+  this.props.ufos.forEach((ufo) => {
+    if (ufo.top > 670 && ufo.top < 750  && Math.abs(ufo.left - this.props.shipX) < 140) {
+      this.props.dispatch(endGame());
+    }
+  });
 
-// if (rect1.x < rect2.x + rect2.width &&
-//     rect1.x + rect1.width > rect2.x &&
-//     rect1.y < rect2.y + rect2.height &&
-//     rect1.height + rect1.y > rect2.y) {
-//   // collision detected!
-// }
+  this.props.bullets.forEach((bullet, bulletIndex) => {
+    this.props.ufos.forEach((ufo, ufoIndex) => {
+      if (bullet.left > ufo.left && bullet.left < ufo.left + 130 && bullet.top > ufo.top && bullet.top < ufo.top + 55) {
+        this.props.dispatch(hitUFO(bulletIndex, ufoIndex)); 
+      } 
+    });
+  });
+}
